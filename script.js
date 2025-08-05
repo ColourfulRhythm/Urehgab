@@ -58,8 +58,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Contact Form Handling
-const contactForm = document.querySelector('.contact-form form');
+// Enhanced Contact Form Handling
+const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -71,36 +71,285 @@ if (contactForm) {
             formObject[key] = value;
         });
         
-        // Simple form validation
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const subject = this.querySelectorAll('input[type="text"]')[1].value;
-        const message = this.querySelector('textarea').value;
+        // Enhanced form validation
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+        const email = formData.get('email');
+        const inquiryType = formData.get('inquiryType');
+        const message = formData.get('message');
         
-        if (!name || !email || !subject || !message) {
-            alert('Please fill in all fields.');
+        // Clear previous errors
+        clearFormErrors();
+        
+        let hasErrors = false;
+        
+        // Validate required fields
+        if (!firstName.trim()) {
+            showFieldError('firstName', 'First name is required');
+            hasErrors = true;
+        }
+        
+        if (!lastName.trim()) {
+            showFieldError('lastName', 'Last name is required');
+            hasErrors = true;
+        }
+        
+        if (!email.trim()) {
+            showFieldError('email', 'Email is required');
+            hasErrors = true;
+        } else if (!isValidEmail(email)) {
+            showFieldError('email', 'Please enter a valid email address');
+            hasErrors = true;
+        }
+        
+        if (!inquiryType) {
+            showFieldError('inquiryType', 'Please select an inquiry type');
+            hasErrors = true;
+        }
+        
+        if (!message.trim()) {
+            showFieldError('message', 'Please tell us about your needs');
+            hasErrors = true;
+        } else if (message.trim().length < 10) {
+            showFieldError('message', 'Please provide more details (at least 10 characters)');
+            hasErrors = true;
+        }
+        
+        if (hasErrors) {
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnIcon = submitBtn.querySelector('i');
+        
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+        btnText.textContent = 'Sending...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
+        
+        // Simulate form submission (replace with actual API call)
+        setTimeout(() => {
+            // Show success message
+            showSuccessMessage(formObject);
+            
+            // Reset form
+            this.reset();
+            
+            // Reset button
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            btnText.textContent = 'Send Message';
+            btnIcon.className = 'fas fa-paper-plane';
+            
+        }, 2000);
+    });
+    
+    // Real-time validation
+    const inputs = contactForm.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+        
+        input.addEventListener('input', function() {
+            // Clear error on input
+            const errorElement = document.getElementById(this.name + '-error');
+            if (errorElement) {
+                errorElement.remove();
+                this.classList.remove('error');
+            }
+        });
+    });
+}
+
+function validateField(field) {
+    const value = field.value.trim();
+    const name = field.name;
+    
+    clearFieldError(name);
+    
+    switch(name) {
+        case 'firstName':
+        case 'lastName':
+            if (!value) {
+                showFieldError(name, 'This field is required');
+            }
+            break;
+        case 'email':
+            if (!value) {
+                showFieldError(name, 'Email is required');
+            } else if (!isValidEmail(value)) {
+                showFieldError(name, 'Please enter a valid email address');
+            }
+            break;
+        case 'inquiryType':
+            if (!value) {
+                showFieldError(name, 'Please select an option');
+            }
+            break;
+        case 'message':
+            if (!value) {
+                showFieldError(name, 'Please tell us about your needs');
+            } else if (value.length < 10) {
+                showFieldError(name, 'Please provide more details (at least 10 characters)');
+            }
+            break;
+    }
+}
+
+function showFieldError(fieldName, message) {
+    const field = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
+    if (!field) return;
+    
+    field.classList.add('error');
+    
+    // Remove existing error
+    const existingError = document.getElementById(fieldName + '-error');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Add error message
+    const errorDiv = document.createElement('div');
+    errorDiv.id = fieldName + '-error';
+    errorDiv.className = 'field-error';
+    errorDiv.textContent = message;
+    
+    field.parentNode.appendChild(errorDiv);
+}
+
+function clearFieldError(fieldName) {
+    const field = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
+    const errorElement = document.getElementById(fieldName + '-error');
+    
+    if (field) {
+        field.classList.remove('error');
+    }
+    if (errorElement) {
+        errorElement.remove();
+    }
+}
+
+function clearFormErrors() {
+    const errors = document.querySelectorAll('.field-error');
+    errors.forEach(error => error.remove());
+    
+    const errorFields = document.querySelectorAll('.error');
+    errorFields.forEach(field => field.classList.remove('error'));
+}
+
+function showSuccessMessage(formData) {
+    // Create success modal or notification
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-notification';
+    successMessage.innerHTML = `
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>Message Sent Successfully!</h3>
+            <p>Thank you, ${formData.firstName}! We've received your ${formData.inquiryType.replace('-', ' ')} inquiry and will get back to you within 24 hours.</p>
+            <button onclick="this.parentElement.parentElement.remove()" class="btn btn-primary">Close</button>
+        </div>
+    `;
+    
+    document.body.appendChild(successMessage);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (successMessage.parentNode) {
+            successMessage.remove();
+        }
+    }, 5000);
+}
+
+// Newsletter Signup Handling
+const newsletterForm = document.getElementById('newsletterForm');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const emailInput = this.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('span');
+        const btnIcon = submitBtn.querySelector('i');
+        
+        // Clear previous errors
+        emailInput.classList.remove('error');
+        const existingError = this.querySelector('.newsletter-error');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Validate email
+        if (!email) {
+            showNewsletterError(emailInput, 'Email address is required');
             return;
         }
         
         if (!isValidEmail(email)) {
-            alert('Please enter a valid email address.');
+            showNewsletterError(emailInput, 'Please enter a valid email address');
             return;
         }
         
-        // Show success message (in a real app, you'd send this to a server)
-        const submitBtn = this.querySelector('.btn-primary');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
+        // Show loading state
         submitBtn.disabled = true;
+        btnText.textContent = 'Subscribing...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
         
-        // Simulate form submission
+        // Simulate newsletter subscription (replace with actual API call)
         setTimeout(() => {
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            this.reset();
-            submitBtn.textContent = originalText;
+            // Show success message
+            showNewsletterSuccess(email);
+            
+            // Reset form
+            emailInput.value = '';
+            
+            // Reset button
             submitBtn.disabled = false;
+            btnText.textContent = 'Subscribe';
+            btnIcon.className = 'fas fa-paper-plane';
+            
         }, 1500);
     });
+}
+
+function showNewsletterError(input, message) {
+    input.classList.add('error');
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'newsletter-error';
+    errorDiv.textContent = message;
+    errorDiv.style.color = '#ef4444';
+    errorDiv.style.fontSize = '0.8rem';
+    errorDiv.style.marginTop = '0.5rem';
+    
+    input.parentNode.appendChild(errorDiv);
+}
+
+function showNewsletterSuccess(email) {
+    // Create success notification
+    const successMessage = document.createElement('div');
+    successMessage.className = 'newsletter-success';
+    successMessage.innerHTML = `
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>Welcome to the Urehgab Community!</h3>
+            <p>Thank you for subscribing! You'll receive our latest insights, hiring trends, and career tips at <strong>${email}</strong>.</p>
+            <p class="success-note">Check your inbox for a welcome message. You can unsubscribe at any time.</p>
+            <button onclick="this.parentElement.parentElement.remove()" class="btn btn-primary">Got it!</button>
+        </div>
+    `;
+    
+    document.body.appendChild(successMessage);
+    
+    // Auto remove after 8 seconds
+    setTimeout(() => {
+        if (successMessage.parentNode) {
+            successMessage.remove();
+        }
+    }, 8000);
 }
 
 // Email validation helper
