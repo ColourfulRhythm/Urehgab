@@ -1,0 +1,28 @@
+{
+  "name": "urehgab-website",
+  "version": "1.0.0",
+  "description": "Urehgab - Strategic Recruitment and Workforce Solutions Across Africa",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server --port=3000 --open",
+    "build": "echo 'Build complete - files are production ready'",
+    "dev": "npx live-server --port=3000 --open --watch=."
+  },
+  "keywords": [
+    "recruitment",
+    "africa",
+    "talent",
+    "hiring",
+    "workforce"
+  ],
+  "author": "Urehgab Limited",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/urehgab/website"
+  },
+  "homepage": "https://www.urehgab.com"
+}
