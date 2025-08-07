@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Vacancy - Urehgab | Let's Get Started</title>
+    <link rel="icon" type="image/svg+xml" href="public/tab-logo.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="public/urehgab-header-logo.png" alt="Urehgab" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="aboutus.html" class="nav-link">About Us</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="remoteworkpolicy.html" class="nav-link">Remote Work Policy</a>
+                <a href="wearehiring.html" class="nav-link">We are Hiring</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="submit-a-vacancy.html" class="nav-link btn-primary">Submit a Vacancy</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Submit a Vacancy</h1>
+                <p>Tell us a bit about your hiring needs, and we will be in touch shortly to discuss how Urehgab can support you.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vacancy Form Section -->
+    <section class="vacancy-form-section">
+        <div class="container">
+            <div class="form-container">
+                <form class="vacancy-form" action="mailto:info@urehgab.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="Name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" name="Company" placeholder="Enter your company name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobTitle">Your Job Title</label>
+                        <input type="text" id="jobTitle" name="Role/Job Title" placeholder="Enter your job title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="Email" placeholder="Enter your email address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="Phone Number" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="services">What Services are you interested in?</label>
+                        <select id="services" name="Services" required>
+                            <option value="" disabled selected>Select…</option>
+                            <option value="Executive Search and Headhunting">Executive Search and Headhunting</option>
+                            <option value="Embedded Partnership">Embedded Partnership</option>
+                            <option value="Human Resource and Capital Development">Human Resource and Capital Development</option>
+                            <option value="Graduate Trainee Programs">Graduate Trainee Programs</option>
+                            <option value="Recruitment Process Outsouce (RPO)">Recruitment Process Outsouce (RPO)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hiringRole">Hiring? What role?</label>
+                        <input type="text" id="hiringRole" name="Hiring? What role?" placeholder="Enter the role you're hiring for">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jdUrl">Insert JD/Job Brief URL</label>
+                        <input type="url" id="jdUrl" name="JD / Hiring Brief file upload" placeholder="Enter URL to job description" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hearAbout">How did you hear about us?</label>
+                        <select id="hearAbout" name="How did you hear about us?" required>
+                            <option value="" disabled selected>Select…</option>
+                            <option value="Word of mouth">Word of mouth</option>
+                            <option value="Google">Google</option>
+                            <option value="Linkedin">Linkedin</option>
+                            <option value="Job Board">Job Boards</option>
+                            <option value="Facebook or Instagram">Facebook or Instagram</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Company Location</label>
+                        <select id="location" name="Location" required>
+                            <option value="" disabled selected>Select…</option>
+                            <option value="amsterdam">Amsterdam</option>
+                            <option value="barcelona">Barcelona</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Ghana">Ghana</option>
+                            <option value="Cote D'Ivoire">Cote D'Ivoire</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Egypt">Egypt</option>
+                        </select>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary">
+                            Let's Get Started
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-info-card">
+                <h3>Get in Touch</h3>
+                <div class="contact-details">
+                    <p><i class="fas fa-envelope"></i> info@urehgab.com</p>
+                    <p><i class="fas fa-envelope"></i> sales@urehgab.com</p>
+                    <p><i class="fas fa-phone"></i> +234 916 180 9447</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Urehgab</h3>
+                    <p>UrehGab is a recruitment agency focused on creating meaningful connections between organizations and exceptional talent.</p>
+                    <p>Lagos, Nigeria</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/urehgab" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://web.facebook.com/people/Urehgab/61576097489160/?mibextid=wwXIfr&rdid=8ZYDEBDGiDgKFOWc&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1CUqZHzX5d%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/urehgab/" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li>Executive Search and Headhunting</li>
+                        <li>Embedded Talent Partnership</li>
+                        <li>Employer Branding</li>
+                        <li>HR & Capital Development</li>
+                        <li>Permanent and Contract Placement</li>
+                        <li>Candidate Assessment</li>
+                        <li>ManPower Outsourcing</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#about">Why Urehgab</a></li>
+                        <li><a href="index.html#about">The Story Behind Urehgab</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#">Terms of service</a>
+                    <a href="#">Privacy policy</a>
+                </div>
+                <p>&copy; 2025 Urehgab Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
