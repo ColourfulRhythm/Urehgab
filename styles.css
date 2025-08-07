@@ -588,6 +588,7 @@ body {
     background: linear-gradient(135deg, var(--primary-navy) 0%, var(--dark-navy) 50%, var(--primary-green) 100%);
     position: relative;
     overflow: hidden;
+    padding-top: 70px; /* Account for fixed navbar */
 }
 
 .hero::before {
@@ -1862,6 +1863,10 @@ section {
         margin: 0.5rem 0;
     }
     
+    .hero {
+        padding-top: 80px; /* Slightly more padding for mobile */
+    }
+    
     .hero-buttons {
         flex-direction: column;
         align-items: center;
@@ -2123,6 +2128,25 @@ section {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding-top: 90px; /* More padding for very small screens */
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem; /* Slightly smaller subtitle for mobile */
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
     .features-grid,
     .services-grid {
         grid-template-columns: 1fr;
@@ -2156,10 +2180,6 @@ section {
     
     .newsletter-form-container {
         padding: 1.5rem;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
     }
     
     .newsletter-text h2 {
