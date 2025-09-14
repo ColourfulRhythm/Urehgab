@@ -95,13 +95,13 @@
                 
                 <div class="contact-form-section">
                     <h2>Send us a Message</h2>
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpwnqkqr" method="POST">
                         <div class="form-row">
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
                         </div>
-                        <input type="text" placeholder="Subject" required>
-                        <textarea placeholder="Your Message" rows="6" required></textarea>
+                        <input type="text" name="subject" placeholder="Subject" required>
+                        <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
                 </div>

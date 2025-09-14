@@ -129,21 +129,36 @@ if (contactForm) {
         btnText.textContent = 'Sending...';
         btnIcon.className = 'fas fa-spinner fa-spin';
         
-        // Simulate form submission (replace with actual API call)
-        setTimeout(() => {
-            // Show success message
-            showSuccessMessage(formObject);
-            
-            // Reset form
-            this.reset();
-            
+        // Submit form to Formspree
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show success message
+                showSuccessMessage(formObject);
+                
+                // Reset form
+                this.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Sorry, there was an error sending your message. Please try again or contact us directly at info@urehgab.com');
+        })
+        .finally(() => {
             // Reset button
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
             btnText.textContent = 'Send Message';
             btnIcon.className = 'fas fa-paper-plane';
-            
-        }, 2000);
+        });
     });
     
     // Real-time validation
