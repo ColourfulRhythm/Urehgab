@@ -176,6 +176,14 @@
     font-size: 12px;
 }
 
+.blog-date-above-title {
+    font-size: 0.875rem;
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
 .blog-content h3 {
     font-size: 20px;
     font-weight: 600;
