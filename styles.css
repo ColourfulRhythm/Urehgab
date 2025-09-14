@@ -3143,8 +3143,8 @@ html {
 /* Blog Post Styles */
 .blog-post-hero {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: var(--white);
+    background: linear-gradient(135deg, #001654 0%, #4A90E2 100%);
+    color: #ffffff;
 }
 
 .blog-post-meta {
