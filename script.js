@@ -129,36 +129,29 @@ if (contactForm) {
         btnText.textContent = 'Sending...';
         btnIcon.className = 'fas fa-spinner fa-spin';
         
-        // Submit form to Formspree
-        fetch(this.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                // Show success message
-                showSuccessMessage(formObject);
-                
-                // Reset form
-                this.reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Sorry, there was an error sending your message. Please try again or contact us directly at info@urehgab.com');
-        })
-        .finally(() => {
-            // Reset button
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-            btnText.textContent = 'Send Message';
-            btnIcon.className = 'fas fa-paper-plane';
-        });
+        // Create mailto link with form data
+        const name = formData.get('name') || '';
+        const email = formData.get('email') || '';
+        const subject = formData.get('subject') || '';
+        const message = formData.get('message') || '';
+        
+        const emailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        const mailtoLink = `mailto:info@urehgab.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        // Show success message
+        showSuccessMessage(formObject);
+        
+        // Reset form
+        this.reset();
+        
+        // Reset button
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Message';
+        btnIcon.className = 'fas fa-paper-plane';
     });
     
     // Real-time validation
